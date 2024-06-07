@@ -24,11 +24,45 @@
 #define D_C		PIND2		//display: Data/Command
 #define Reset	PIND3		//display: Reset
 
-
 volatile uint16_t counter;
 
 void SPISend8Bit(uint8_t data);
 void SendCommandSeq(const uint16_t * data, uint32_t Anzahl);
+
+ISR(TIMER1_COMPA_vect);		//Interrupt Service Routine
+const uint16_t Fenster[];	//Array für die Initialisierung des Displays
+void Waitms(const uint16_t msWait);
+void init_Timer1();
+void SPI_init();
+void Display_init();
+
+
+int main(void){
+    uint16_t i;
+	DDRB &= ~(1<<PORTB1);
+	PORTB |= (1<<PORTB1);
+	DDRD &= ~(1<<PORTD1);
+	PORTD |= (1<<PORTD1);
+	DDRD |= (1<<D_C)|(1<<Reset);		//output: PD2 -> Data/Command; PD3 -> Reset
+
+	init_Timer1();
+	SPI_init();
+	sei();
+	Display_init();
+
+    for(i=0; i<23232; i++){ // 132*176 = 23232 
+     SPISend8Bit(0xFF);      // gelb 0xFFE0
+     SPISend8Bit(0xE0);
+    }
+    
+    SendCommandSeq(Fenster, 6);         
+    for(i=0; i<300; i++){               //20*15 = 300
+        SPISend8Bit(0x7);               //grün 0x7E0
+        SPISend8Bit(0xE0);
+    }   
+   
+	while(1){;}
+}
 
 ISR(TIMER1_COMPA_vect){
 	counter++;	
@@ -52,8 +86,6 @@ void Waitms(const uint16_t msWait){
 			  diff = countertemp + ~aktTime + 1;
 	  } while (diff	< msWait); 	
 }
-
-
 
 void init_Timer1(){
 	TCCR1B |= (1<<CS10) | (1<<WGM12);	// TimerCounter1ControlRegisterB Clock Select |(1<<CS10)=>prescaler = 1; WGM12=>CTC mode
@@ -92,7 +124,7 @@ void SendCommandSeq(const uint16_t * data, uint32_t Anzahl){
 	}
 }
 
-void Display_init(void) {
+void Display_init() {
 	const uint16_t InitData[] ={
 		//Initialisierungsdaten fuer 16 Bit Farben Modus
 		0xFDFD, 0xFDFD,
@@ -125,32 +157,4 @@ void Display_init(void) {
 	SendCommandSeq(&InitData[12], 23);
 	Waitms(75);
 	SendCommandSeq(&InitData[35], 6);
-}
-
-
-int main(void){
-    uint16_t i;
-	DDRB &= ~(1<<PORTB1);
-	PORTB |= (1<<PORTB1);
-	DDRD &= ~(1<<PORTD1);
-	PORTD |= (1<<PORTD1);
-	DDRD |= (1<<D_C)|(1<<Reset);		//output: PD2 -> Data/Command; PD3 -> Reset
-
-	init_Timer1();
-	SPI_init();
-	sei();
-	Display_init();
-
-    for(i=0; i<23232; i++){ // 132*176 = 23232 
-     SPISend8Bit(0xFF);      // gelb 0xFFE0
-     SPISend8Bit(0xE0);
-    }
-    
-    SendCommandSeq(Fenster, 6);         
-    for(i=0; i<300; i++){               //20*15 = 300
-        SPISend8Bit(0x7);              //grün 0x7E0
-        SPISend8Bit(0xE0);
-    }   
-   
-	while(1){;}
 }
