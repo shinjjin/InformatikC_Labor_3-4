@@ -29,12 +29,12 @@ volatile uint16_t counter;
 void SPISend8Bit(uint8_t data);
 void SendCommandSeq(const uint16_t * data, uint32_t Anzahl);
 
-ISR(TIMER1_COMPA_vect);		//Interrupt Service Routine
-const uint16_t Fenster[];	//Array für die Initialisierung des Displays
+ISR(TIMER1_COMPA_vect);		//Interrupt Service Routine	
 void Waitms(const uint16_t msWait);
 void init_Timer1();
 void SPI_init();
 void Display_init();
+uint16_t Fenster[]={ 0xEF08, 0x1800, 0x1223, 0x1536, 0x135A, 0x1668 }; //Array für die Initialisierung des Displays
 
 
 int main(void){
@@ -64,14 +64,11 @@ int main(void){
 	while(1){;}
 }
 
+
+
 ISR(TIMER1_COMPA_vect){
 	counter++;	
 }
-
-const uint16_t Fenster[]={
-    0xEF08,	0x1800,	0x1223, 0x1536,	0x135A,
-	0x1668
-};
 
 void Waitms(const uint16_t msWait){
 	static uint16_t aktTime, diff;
