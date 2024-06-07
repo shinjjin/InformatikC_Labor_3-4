@@ -27,6 +27,8 @@
 // defining global variables
 volatile uint16_t counter;
 uint16_t i;
+volatile uint16_t count_1 = 0;
+volatile uint16_t count_2 = 0;
 
 // Debounce flags for buttons
 volatile uint8_t button_pressed_1 = 0; // Flag for debounced Button 1 press
@@ -97,25 +99,29 @@ ISR (TIMER0_COMPA_vect){
 		prev_count_1++;
 		if (prev_count_1 >= 10) { // Check debounce threshold
 		button_pressed_1 = 1;
+            count_1++;
 		}
 	} else { // Button 1 is released
 		prev_count_1 = 0;
 		button_pressed_1 = 0; // Reset flag
-	}
+		count_1 = 0;
+	}	
 
 	// Debounce Button 2
 	if (!(PIND & (1 << PD1))) { // Button 2 is pressed
 		prev_count_2++;
 		if (prev_count_2 >= 10) { // Check debounce threshold
 		button_pressed_2 = 1;
+        count_2++;
 		}
 	} else { // Button 2 is released
 		prev_count_2 = 0;
 		button_pressed_2 = 0; // Reset flag
+        count_2 = 0;
     }
 
         
-	if (button_pressed_1 && window[4] < 0x1583){ 
+	if (button_pressed_1 && window[4] < 0x1583 && (count_1 ==1 || count_1 >= 100)){ 
 		//erase square
 		SendCommandSeq(window, 6);         
 		for(i = 0; i < 300; i++){              
@@ -125,11 +131,11 @@ ISR (TIMER0_COMPA_vect){
 		// move square
 		window[2] += 0x1;
 		window[4] += 0x1;
-		Waitms(1);
 	}
+            
 
 // check for a button press 
-	if (button_pressed_2 && window[2] > 0x1200){ 
+	if (button_pressed_2 && window[2] > 0x1200 && (count_2 ==1 || count_2 >= 100)){ 
 		//erase square
 		SendCommandSeq(window, 6);         
 		for(i = 0; i < 300; i++){              
@@ -140,7 +146,6 @@ ISR (TIMER0_COMPA_vect){
 		window[2] -= 0x1;
 		window[4] -= 0x1;
 	}
-		Waitms(1);
 }
 
 
