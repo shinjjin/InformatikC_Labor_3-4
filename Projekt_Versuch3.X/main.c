@@ -24,17 +24,30 @@
 #define D_C		PIND2		//display: Data/Command
 #define Reset	PIND3		//display: Reset
 
+// defining global variables
 volatile uint16_t counter;
+uint16_t i;
 
-void SPISend8Bit(uint8_t data);
-void SendCommandSeq(const uint16_t * data, uint32_t Anzahl);
+// Debounce flags for buttons
+volatile uint8_t button_pressed_1 = 0; // Flag for debounced Button 1 press
+volatile uint8_t button_pressed_2 = 0; // Flag for debounced Button 2 press
 
-ISR(TIMER1_COMPA_vect);		//Interrupt Service Routine	
+// Debounce counter variables
+volatile uint8_t prev_count_1 = 0;  // Counter for debouncing Button 1
+volatile uint8_t prev_count_2 = 0;  // Counter for debouncing Button 2
+
+uint16_t window[]={ 0xEF08, 0x1800, 0x1223, 0x135A, 0x1536, 0x1668 }; //Array für die Initialisierung des Displays
+
+
+// defining the methods
+ISR(TIMER1_COMPA_vect);
 void Waitms(const uint16_t msWait);
 void init_Timer1();
+void init_Timer0();
 void SPI_init();
-void Display_init();
-uint16_t Fenster[]={ 0xEF08, 0x1800, 0x1223, 0x1536, 0x135A, 0x1668 }; //Array für die Initialisierung des Displays
+void SPISend8Bit(uint8_t data);
+void SendCommandSeq(const uint16_t * data, uint32_t Anzahl);
+void Display_init(void);
 
 
 int main(void){
@@ -44,30 +57,98 @@ int main(void){
 	DDRD &= ~(1<<PORTD1);
 	PORTD |= (1<<PORTD1);
 	DDRD |= (1<<D_C)|(1<<Reset);		//output: PD2 -> Data/Command; PD3 -> Reset
-
+    
 	init_Timer1();
 	SPI_init();
 	sei();
 	Display_init();
 
+    // draw bg
     for(i=0; i<23232; i++){ // 132*176 = 23232 
      SPISend8Bit(0xFF);      // gelb 0xFFE0
      SPISend8Bit(0xE0);
     }
     
-    SendCommandSeq(Fenster, 6);         
+    // draw square
+    SendCommandSeq(window, 6);         
     for(i=0; i<300; i++){               //20*15 = 300
-        SPISend8Bit(0x7);               //grün 0x7E0
+        SPISend8Bit(0x7);              //grün 0x7E0
         SPISend8Bit(0xE0);
     }   
-   
+    
+    init_Timer0();
 	while(1){;}
 }
 
-
-
 ISR(TIMER1_COMPA_vect){
 	counter++;	
+}
+
+ISR (TIMER0_COMPA_vect){
+     // draw square
+            SendCommandSeq(window, 6);         
+			for(i=0; i<300; i++){          //20*15 = 300
+			SPISend8Bit(0x7);              //grün 0x7E0
+			SPISend8Bit(0xE0);
+    } 
+
+	 // Debounce Button 1
+	if (!(PINB & (1 << PB1))) { // Button 1 is pressed
+		prev_count_1++;
+		if (prev_count_1 >= 10) { // Check debounce threshold
+		button_pressed_1 = 1;
+		}
+	} else { // Button 1 is released
+		prev_count_1 = 0;
+		button_pressed_1 = 0; // Reset flag
+	}
+
+	// Debounce Button 2
+	if (!(PIND & (1 << PD1))) { // Button 2 is pressed
+		prev_count_2++;
+		if (prev_count_2 >= 10) { // Check debounce threshold
+		button_pressed_2 = 1;
+		}
+	} else { // Button 2 is released
+		prev_count_2 = 0;
+		button_pressed_2 = 0; // Reset flag
+    }
+
+        
+	if (button_pressed_1 && window[4] < 0x1583){ 
+		//erase square
+		SendCommandSeq(window, 6);         
+		for(i = 0; i < 300; i++){              
+		SPISend8Bit(0xFF);                      
+		SPISend8Bit(0xE0);
+	}  
+		// move square
+		window[2] += 0x1;
+		window[4] += 0x1;
+		Waitms(1);
+	}
+
+// check for a button press 
+	if (button_pressed_2 && window[2] > 0x1200){ 
+		//erase square
+		SendCommandSeq(window, 6);         
+		for(i = 0; i < 300; i++){              
+			SPISend8Bit(0xFF);                      
+			SPISend8Bit(0xE0);
+		}  
+		// move square
+		window[2] -= 0x1;
+		window[4] -= 0x1;
+	}
+		Waitms(1);
+}
+
+
+void init_Timer0(){
+    TCCR0A |= (1 << WGM01);
+    TCCR0B |= (1 << CS01) | (1 << CS00);    // prescaler 64
+    TIMSK0 |=  (1 << OCIE0A);
+    OCR0A = 249;
 }
 
 void Waitms(const uint16_t msWait){
@@ -121,7 +202,7 @@ void SendCommandSeq(const uint16_t * data, uint32_t Anzahl){
 	}
 }
 
-void Display_init() {
+void Display_init(void) {
 	const uint16_t InitData[] ={
 		//Initialisierungsdaten fuer 16 Bit Farben Modus
 		0xFDFD, 0xFDFD,
