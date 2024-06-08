@@ -40,6 +40,7 @@ void Display_init(void);
 int main(void)
 {
 	uint16_t i;
+	uint16_t x;
 	uint32_t p;
 	DDRD |= (1 << D_C) | (1 << Reset); // output: PD2 -> Data/Command; PD3 -> Reset
 	init_Timer1();
@@ -58,11 +59,41 @@ int main(void)
 		SPISend16Bit(0xF800); // rot
 	}
 
-	Waitms(1000);
+	// for (i = 0; i < 10640 && Bild1[i] < 2904; i += x) // 140*76 = 10640
+	// {
+	// 	if (Bild1[i] == Bild1[i + x])
+	// 	{
+	// 		x = Bild1[i + 2] + 2;
+	// 		for (p = 0; p < x; p++)
+	// 		{
+	// 			SPISend16Bit(Bild1[i]);
+	// 		}
+	// 	}
+	// 	else
+	// 	{
+	// 		SPISend16Bit(Bild1[i]);
+	// 		x = 1;
+	// 	}
+	// }
 
-	for (i = 0; i < 10640; i++) // 140*76 = 10640
+	i = 0;
+	while (i < 2900)
 	{
-		SPISend16Bit(Bild1[i]);
+		if (Bild1[i] == Bild1[i + 1])
+		{
+			x = Bild1[i + 2] + 2;
+			for (p = 0; p < x; p++)
+			{
+				SPISend16Bit(Bild1[i]);
+			}
+			i += 3;
+		}
+		else
+		{
+			SPISend16Bit(Bild1[i]);
+			i++;
+		}
+		Waitms(1);
 	}
 
 	while (1)
