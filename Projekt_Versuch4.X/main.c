@@ -139,6 +139,7 @@ void Display_init(void)
 int main(void)
 {
 	uint16_t i;
+    uint32_t p;
 	DDRD |= (1 << D_C) | (1 << Reset); // output: PD2 -> Data/Command; PD3 -> Reset
 	init_Timer1();
 	SPI_init();
@@ -156,8 +157,11 @@ int main(void)
         SPISend16Bit(0xF800);   //rot 
 	}
     
+    Waitms(1000);
+    
     for (i = 0; i < 10640; i++) // 140*76 = 10640
 	{
+        SPISend16Bit(Bild1[i]);
         
     }
 
