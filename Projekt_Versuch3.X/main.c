@@ -25,10 +25,10 @@
 #define Reset PIND3 // display: Reset
 
 // defining global variables
-volatile uint16_t counter;
-uint16_t i;
-volatile uint16_t count_1 = 0;
-volatile uint16_t count_2 = 0;
+volatile uint16_t counter;	   // Timer1 counter
+uint16_t i;					   // Counter for the for loop
+volatile uint16_t count_1 = 0; // Counter for Button 1 hold
+volatile uint16_t count_2 = 0; // Counter for Button 2 hold
 
 // Debounce flags for buttons
 volatile uint8_t button_pressed_1 = 0; // Flag for debounced Button 1 press
@@ -38,7 +38,7 @@ volatile uint8_t button_pressed_2 = 0; // Flag for debounced Button 2 press
 volatile uint8_t prev_count_1 = 0; // Counter for debouncing Button 1
 volatile uint8_t prev_count_2 = 0; // Counter for debouncing Button 2
 
-uint16_t window[] = {0xEF08, 0x1800, 0x1223, 0x135A, 0x1536, 0x1668}; // Array für die Initialisierung des Displays
+uint16_t window[] = {0xEF08, 0x1800, 0x1223, 0x135A, 0x1536, 0x1668}; // Array for the initialization of the window
 
 // defining the methods
 ISR(TIMER1_COMPA_vect);
@@ -51,9 +51,9 @@ void SPISend8Bit(uint8_t data);
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl);
 void Display_init(void);
 
+// main method
 int main(void)
 {
-	uint16_t i;
 	DDRB &= ~(1 << PORTB1);
 	PORTB |= (1 << PORTB1);
 	DDRD &= ~(1 << PORTD1);
@@ -66,16 +66,16 @@ int main(void)
 	Display_init();
 
 	// draw bg
-	for (i = 0; i < 23232; i++)
-	{					   // 132*176 = 23232
+	for (i = 0; i < 23232; i++) // 132*176 = 23232
+	{
 		SPISend8Bit(0xFF); // gelb 0xFFE0
 		SPISend8Bit(0xE0);
 	}
 
 	// draw square
 	SendCommandSeq(window, 6);
-	for (i = 0; i < 300; i++)
-	{					  // 20*15 = 300
+	for (i = 0; i < 300; i++) // 20*15 = 300
+	{
 		SPISend8Bit(0x7); // grün 0x7E0
 		SPISend8Bit(0xE0);
 	}
@@ -87,11 +87,13 @@ int main(void)
 	}
 }
 
+// Timer1 interrupt service routine
 ISR(TIMER1_COMPA_vect)
 {
 	counter++;
 }
 
+// Timer0 interrupt service routine
 ISR(TIMER0_COMPA_vect)
 {
 	// draw square
@@ -103,8 +105,8 @@ ISR(TIMER0_COMPA_vect)
 	}
 
 	// Debounce Button 1 + checking if the button is held
-	if (!(PINB & (1 << PB1)))
-	{ // Button 1 is pressed
+	if (!(PINB & (1 << PB1))) // Button 1 is pressed
+	{
 		prev_count_1++;
 		if (prev_count_1 >= 10)
 		{
@@ -166,6 +168,7 @@ ISR(TIMER0_COMPA_vect)
 	}
 }
 
+// Timer0 initialization
 void init_Timer0()
 {
 	TCCR0A |= (1 << WGM01);
@@ -174,6 +177,7 @@ void init_Timer0()
 	OCR0A = 249;
 }
 
+// Wait function
 void Waitms(const uint16_t msWait)
 {
 	static uint16_t aktTime, diff;
@@ -190,6 +194,7 @@ void Waitms(const uint16_t msWait)
 	} while (diff < msWait);
 }
 
+// Timer1 initialization
 void init_Timer1()
 {
 	TCCR1B |= (1 << CS10) | (1 << WGM12); // TimerCounter1ControlRegisterB Clock Select |(1<<CS10)=>prescaler = 1; WGM12=>CTC mode
@@ -197,6 +202,7 @@ void init_Timer1()
 	OCR1A = 15999;						  // direkte Zahl macht Sinn; overflow register OCR1A berechnet mit division 64 => unlogischer Registerwert
 }
 
+// SPI initialization
 void SPI_init()
 {
 	// set CS, MOSI and SCK to output
@@ -206,7 +212,7 @@ void SPI_init()
 	SPCR = (1 << SPE) | (1 << MSTR); // | (1 << SPR1) | (1 << SPR0); 4MHz bzw. 125kHz
 									 // SPSR |= 0x1;
 }
-
+// SPI send 8 bit
 void SPISend8Bit(uint8_t data)
 {
 	//	farbe = data;
@@ -217,6 +223,7 @@ void SPISend8Bit(uint8_t data)
 	PORTB |= (1 << SS); // CS high
 }
 
+// Send command sequence
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl)
 {
 	uint32_t index;
@@ -231,7 +238,7 @@ void SendCommandSeq(const uint16_t *data, uint32_t Anzahl)
 		PORTD &= ~(1 << D_C); // Data/Command auf Low => Daten-Modus
 	}
 }
-
+// Display initialisation
 void Display_init(void)
 {
 	const uint16_t InitData[] = {
