@@ -403,20 +403,20 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0xf0b
+.debug_info     0x0000000000000000      0xee0
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x917 build/default/production/main.o
+ .debug_info    0x00000000000005f4      0x8ec build/default/production/main.o
 
 .debug_abbrev   0x0000000000000000      0x707
  *(.debug_abbrev)
  .debug_abbrev  0x0000000000000000      0x5a2 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
  .debug_abbrev  0x00000000000005a2      0x165 build/default/production/main.o
 
-.debug_line     0x0000000000000000      0x593
+.debug_line     0x0000000000000000      0x575
  *(.debug_line .debug_line.* .debug_line_end)
  .debug_line    0x0000000000000000      0x137 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_line    0x0000000000000137      0x45c build/default/production/main.o
+ .debug_line    0x0000000000000137      0x43e build/default/production/main.o
 
 .debug_frame    0x0000000000000000      0x180
  *(.debug_frame)
@@ -510,126 +510,126 @@ LOAD data_init
                 0x0000000000800166                counter
 
 .text.__vector_14
-                0x00000000000000c8      0x260
+                0x00000000000000c8      0x250
  .text.__vector_14
-                0x00000000000000c8      0x260 build/default/production/main.o
+                0x00000000000000c8      0x250 build/default/production/main.o
                 0x00000000000000c8                __vector_14
 
 .text.Display_init
-                0x0000000000000328       0xdc
+                0x0000000000000318       0xdc
  .text.Display_init
-                0x0000000000000328       0xdc build/default/production/main.o
-                0x0000000000000328                Display_init
+                0x0000000000000318       0xdc build/default/production/main.o
+                0x0000000000000318                Display_init
 
-.text.main      0x0000000000000404       0x84
- .text.main     0x0000000000000404       0x84 build/default/production/main.o
-                0x0000000000000404                main
+.text.main      0x00000000000003f4       0x84
+ .text.main     0x00000000000003f4       0x84 build/default/production/main.o
+                0x00000000000003f4                main
 
 .text.SendCommandSeq
-                0x0000000000000488       0x82
+                0x0000000000000478       0x82
  .text.SendCommandSeq
-                0x0000000000000488       0x82 build/default/production/main.o
-                0x0000000000000488                SendCommandSeq
+                0x0000000000000478       0x82 build/default/production/main.o
+                0x0000000000000478                SendCommandSeq
 
-.text.Waitms    0x000000000000050a       0x34
- .text.Waitms   0x000000000000050a       0x34 build/default/production/main.o
-                0x000000000000050a                Waitms
+.text.Waitms    0x00000000000004fa       0x34
+ .text.Waitms   0x00000000000004fa       0x34 build/default/production/main.o
+                0x00000000000004fa                Waitms
 
 .text.__vector_11
-                0x000000000000053e       0x24
+                0x000000000000052e       0x24
  .text.__vector_11
-                0x000000000000053e       0x24 build/default/production/main.o
-                0x000000000000053e                __vector_11
+                0x000000000000052e       0x24 build/default/production/main.o
+                0x000000000000052e                __vector_11
 
 .text.init_Timer1
-                0x0000000000000562       0x22
+                0x0000000000000552       0x22
  .text.init_Timer1
-                0x0000000000000562       0x22 build/default/production/main.o
-                0x0000000000000562                init_Timer1
+                0x0000000000000552       0x22 build/default/production/main.o
+                0x0000000000000552                init_Timer1
 
 .text.init_Timer0
-                0x0000000000000584       0x1c
+                0x0000000000000574       0x1c
  .text.init_Timer0
-                0x0000000000000584       0x1c build/default/production/main.o
-                0x0000000000000584                init_Timer0
+                0x0000000000000574       0x1c build/default/production/main.o
+                0x0000000000000574                init_Timer0
 
-.text.exit      0x00000000000005a0       0x16
- .text.exit     0x00000000000005a0       0x16 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
-                0x00000000000005a0                exit
+.text.exit      0x0000000000000590       0x16
+ .text.exit     0x0000000000000590       0x16 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
+                0x0000000000000590                exit
 
 .text.SPISend16Bit
-                0x00000000000005b6       0x14
+                0x00000000000005a6       0x14
  .text.SPISend16Bit
-                0x00000000000005b6       0x14 build/default/production/main.o
-                0x00000000000005b6                SPISend16Bit
+                0x00000000000005a6       0x14 build/default/production/main.o
+                0x00000000000005a6                SPISend16Bit
 
-.text.libgcc    0x00000000000005ca       0x10
- .text.libgcc   0x00000000000005ca       0x10 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const\libgcc.a(_xload_2.o)
-                0x00000000000005ca                __xload_2
+.text.libgcc    0x00000000000005ba       0x10
+ .text.libgcc   0x00000000000005ba       0x10 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/avr5/memx-const\libgcc.a(_xload_2.o)
+                0x00000000000005ba                __xload_2
 
 .text.SPISend8Bit
-                0x00000000000005da        0xe
+                0x00000000000005ca        0xe
  .text.SPISend8Bit
-                0x00000000000005da        0xe build/default/production/main.o
-                0x00000000000005da                SPISend8Bit
+                0x00000000000005ca        0xe build/default/production/main.o
+                0x00000000000005ca                SPISend8Bit
 
-.text.SPI_init  0x00000000000005e8        0xc
+.text.SPI_init  0x00000000000005d8        0xc
  .text.SPI_init
-                0x00000000000005e8        0xc build/default/production/main.o
-                0x00000000000005e8                SPI_init
+                0x00000000000005d8        0xc build/default/production/main.o
+                0x00000000000005d8                SPI_init
 
-.text           0x00000000000005f4        0x4
- .text          0x00000000000005f4        0x4 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
-                0x00000000000005f4                __vector_22
-                0x00000000000005f4                __vector_1
-                0x00000000000005f4                __vector_24
-                0x00000000000005f4                __vector_12
-                0x00000000000005f4                __bad_interrupt
-                0x00000000000005f4                __vector_6
-                0x00000000000005f4                __vector_3
-                0x00000000000005f4                __vector_23
-                0x00000000000005f4                __vector_25
-                0x00000000000005f4                __vector_13
-                0x00000000000005f4                __vector_17
-                0x00000000000005f4                __vector_19
-                0x00000000000005f4                __vector_7
-                0x00000000000005f4                __vector_5
-                0x00000000000005f4                __vector_4
-                0x00000000000005f4                __vector_9
-                0x00000000000005f4                __vector_2
-                0x00000000000005f4                __vector_21
-                0x00000000000005f4                __vector_15
-                0x00000000000005f4                __vector_8
-                0x00000000000005f4                __vector_10
-                0x00000000000005f4                __vector_16
-                0x00000000000005f4                __vector_18
-                0x00000000000005f4                __vector_20
+.text           0x00000000000005e4        0x4
+ .text          0x00000000000005e4        0x4 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
+                0x00000000000005e4                __vector_22
+                0x00000000000005e4                __vector_1
+                0x00000000000005e4                __vector_24
+                0x00000000000005e4                __vector_12
+                0x00000000000005e4                __bad_interrupt
+                0x00000000000005e4                __vector_6
+                0x00000000000005e4                __vector_3
+                0x00000000000005e4                __vector_23
+                0x00000000000005e4                __vector_25
+                0x00000000000005e4                __vector_13
+                0x00000000000005e4                __vector_17
+                0x00000000000005e4                __vector_19
+                0x00000000000005e4                __vector_7
+                0x00000000000005e4                __vector_5
+                0x00000000000005e4                __vector_4
+                0x00000000000005e4                __vector_9
+                0x00000000000005e4                __vector_2
+                0x00000000000005e4                __vector_21
+                0x00000000000005e4                __vector_15
+                0x00000000000005e4                __vector_8
+                0x00000000000005e4                __vector_10
+                0x00000000000005e4                __vector_16
+                0x00000000000005e4                __vector_18
+                0x00000000000005e4                __vector_20
 
-.text._Exit     0x00000000000005f8        0x4
- .text._Exit    0x00000000000005f8        0x4 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(_Exit.o)
-                0x00000000000005f8                _Exit
+.text._Exit     0x00000000000005e8        0x4
+ .text._Exit    0x00000000000005e8        0x4 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(_Exit.o)
+                0x00000000000005e8                _Exit
 
 .text.__dummy_fini
-                0x00000000000005fc        0x2
+                0x00000000000005ec        0x2
  .text.__dummy_fini
-                0x00000000000005fc        0x2 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
-                0x00000000000005fc                _fini
+                0x00000000000005ec        0x2 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
+                0x00000000000005ec                _fini
 
 .text.__dummy_funcs_on_exit
-                0x00000000000005fe        0x2
+                0x00000000000005ee        0x2
  .text.__dummy_funcs_on_exit
-                0x00000000000005fe        0x2 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
-                0x00000000000005fe                __funcs_on_exit
+                0x00000000000005ee        0x2 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
+                0x00000000000005ee                __funcs_on_exit
 
 .text.__dummy_simulator_exit
-                0x0000000000000600        0x2
+                0x00000000000005f0        0x2
  .text.__dummy_simulator_exit
-                0x0000000000000600        0x2 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
-                0x0000000000000600                __simulator_exit
+                0x00000000000005f0        0x2 c:/program files/microchip/xc8/v2.46/avr/bin/../lib/gcc/avr/5.4.0/../../../../avr/lib/avr5/memx-const\libc.a(exit.o)
+                0x00000000000005f0                __simulator_exit
 
-.rodata         0x0000000000800100       0x52 load address 0x0000000000000602
+.rodata         0x0000000000800100       0x52 load address 0x00000000000005f2
  .rodata        0x0000000000800100       0x52 build/default/production/main.o
 
-.data.window    0x0000000000800152        0xc load address 0x0000000000000654
+.data.window    0x0000000000800152        0xc load address 0x0000000000000644
  .data.window   0x0000000000800152        0xc build/default/production/main.o
                 0x0000000000800152                window

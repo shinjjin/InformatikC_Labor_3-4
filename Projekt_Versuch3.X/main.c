@@ -99,8 +99,7 @@ ISR(TIMER0_COMPA_vect)
 	SendCommandSeq(window, 6);
 	for (i = 0; i < 300; i++) // 20*15 = 300
 	{
-		SPISend8Bit(0x7); // grün 0x7E0
-		SPISend8Bit(0xE0);
+		SPISend16Bit(0x7E0); // grün 0x7E0
 	}
 
 	// Debounce Button 1 + checking if the button is held
@@ -143,8 +142,7 @@ ISR(TIMER0_COMPA_vect)
 		SendCommandSeq(window, 6);
 		for (i = 0; i < 300; i++)
 		{
-			SPISend8Bit(0xFF);
-			SPISend8Bit(0xE0);
+			SPISend16Bit(0xFFE0); // gelb 0xFFE0
 		}
 		// move square
 		window[2] += 0x1;
@@ -158,8 +156,7 @@ ISR(TIMER0_COMPA_vect)
 		SendCommandSeq(window, 6);
 		for (i = 0; i < 300; i++)
 		{
-			SPISend8Bit(0xFF);
-			SPISend8Bit(0xE0);
+			SPISend16Bit(0xFFE0); // gelb 0xFFE0
 		}
 		// move square
 		window[2] -= 0x1;

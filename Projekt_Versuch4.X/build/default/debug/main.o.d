@@ -1,4 +1,4 @@
-build/default/production/main.o.d build/default/production/main.o: main.c \
+build/default/debug/main.o.d build/default/debug/main.o: main.c \
  c:\program\ files\microchip\xc8\v2.46\avr\lib\gcc\avr\5.4.0\include\xc.h \
  c:\program\ files\microchip\xc8\v2.46\avr\lib\gcc\avr\5.4.0\include\cci.h \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\avr\io.h \
