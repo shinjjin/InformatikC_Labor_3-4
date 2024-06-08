@@ -81,7 +81,10 @@ int main(void)
 	}
 
 	init_Timer0();
-	while (1){;}
+	while (1)
+	{
+		;
+	}
 }
 
 ISR(TIMER1_COMPA_vect)
@@ -93,13 +96,13 @@ ISR(TIMER0_COMPA_vect)
 {
 	// draw square
 	SendCommandSeq(window, 6);
-	for (i = 0; i < 300; i++)   // 20*15 = 300
-	{					  
+	for (i = 0; i < 300; i++) // 20*15 = 300
+	{
 		SPISend8Bit(0x7); // grün 0x7E0
 		SPISend8Bit(0xE0);
 	}
 
-	// Debounce Button 1 + checking if the button is held 
+	// Debounce Button 1 + checking if the button is held
 	if (!(PINB & (1 << PB1)))
 	{ // Button 1 is pressed
 		prev_count_1++;
@@ -116,7 +119,7 @@ ISR(TIMER0_COMPA_vect)
 		count_1 = 0;
 	}
 
-	// Debounce Button 2 + checking if the button is held 
+	// Debounce Button 2 + checking if the button is held
 	if (!(PIND & (1 << PD1)))
 	{ // Button 2 is pressed
 		prev_count_2++;
