@@ -48,7 +48,7 @@ void init_Timer1();
 void init_Timer0();
 void SPI_init();
 void SPISend8Bit(uint8_t data);
-void SPISend16Bit (uint16_t data);
+void SPISend16Bit(uint16_t data);
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl);
 void Display_init(void);
 
@@ -220,9 +220,10 @@ void SPISend8Bit(uint8_t data)
 }
 
 // SPI send 16 bit
-void SPISend16Bit(uint16_t data){
-    uint8_t SendeByte;
-    SendeByte = (data >> 8) & 0xFF; // High-Byte des Kommandos
+void SPISend16Bit(uint16_t data)
+{
+	uint8_t SendeByte;
+	SendeByte = (data >> 8) & 0xFF; // High-Byte des Kommandos
 	SPISend8Bit(SendeByte);
 	SendeByte = data & 0xFF; // Low-Byte des Kommandos
 	SPISend8Bit(SendeByte);

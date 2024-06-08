@@ -25,17 +25,59 @@
 #define Reset PIND3 // display: Reset
 
 volatile uint16_t counter;
+const uint16_t window[] = {0xEF08, 0x1805, 0x1267, 0x151C, 0x1311, 0x169C};
 
 void SPISend8Bit(uint8_t data);
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl);
+ISR(TIMER1_COMPA_vect);
+void Waitms(const uint16_t msWait);
+void init_Timer1();
+void SPI_init();
+void SPISend16Bit(uint16_t data);
+void Display_init(void);
 
-const uint16_t window[] = {0xEF08, 0x1805, 0x1267, 0x151C, 0x1311, 0x169C};
+// main method
+int main(void)
+{
+	uint16_t i;
+	uint32_t p;
+	DDRD |= (1 << D_C) | (1 << Reset); // output: PD2 -> Data/Command; PD3 -> Reset
+	init_Timer1();
+	SPI_init();
+	sei();
+	Display_init();
 
+	for (i = 0; i < 23232; i++) // 132*176 = 23232
+	{
+		SPISend16Bit(0x7E0); // grün
+	}
+
+	SendCommandSeq(window, 6);
+	for (i = 0; i < 10640; i++) // 140*76 = 10640
+	{
+		SPISend16Bit(0xF800); // rot
+	}
+
+	Waitms(1000);
+
+	for (i = 0; i < 10640; i++) // 140*76 = 10640
+	{
+		SPISend16Bit(Bild1[i]);
+	}
+
+	while (1)
+	{
+		;
+	}
+}
+
+// Timer1 interrupt service routine
 ISR(TIMER1_COMPA_vect)
 {
 	counter++;
 }
 
+// wait for msWait milliseconds function
 void Waitms(const uint16_t msWait)
 {
 	static uint16_t aktTime, diff;
@@ -52,6 +94,7 @@ void Waitms(const uint16_t msWait)
 	} while (diff < msWait);
 }
 
+// Timer0 interrupt service routine
 void init_Timer1()
 {
 	TCCR1B |= (1 << CS10) | (1 << WGM12); // TimerCounter1ControlRegisterB Clock Select |(1<<CS10)=>prescaler = 1; WGM12=>CTC mode
@@ -59,6 +102,7 @@ void init_Timer1()
 	OCR1A = 15999;						  // Aufloesung msec
 }
 
+// SPI initialization
 void SPI_init()
 {
 	// set CS, MOSI and SCK to output
@@ -68,6 +112,7 @@ void SPI_init()
 									 // SPSR |= 0x1;
 }
 
+// SPI send 8 bit
 void SPISend8Bit(uint8_t data)
 {
 	PORTB &= ~(1 << SS); // CS low
@@ -77,14 +122,17 @@ void SPISend8Bit(uint8_t data)
 	PORTB |= (1 << SS); // CS high
 }
 
-void SPISend16Bit(uint16_t data){
-    uint8_t SendeByte;
-    SendeByte = (data >> 8) & 0xFF; // High-Byte des Kommandos
+// SPI send 16 bit
+void SPISend16Bit(uint16_t data)
+{
+	uint8_t SendeByte;
+	SendeByte = (data >> 8) & 0xFF; // High-Byte des Kommandos
 	SPISend8Bit(SendeByte);
 	SendeByte = data & 0xFF; // Low-Byte des Kommandos
 	SPISend8Bit(SendeByte);
 }
 
+// Send command sequence
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl)
 {
 	uint32_t index;
@@ -100,6 +148,7 @@ void SendCommandSeq(const uint16_t *data, uint32_t Anzahl)
 	}
 }
 
+// Display initialization
 void Display_init(void)
 {
 	const uint16_t InitData[] = {
@@ -134,39 +183,4 @@ void Display_init(void)
 	SendCommandSeq(&InitData[12], 23);
 	Waitms(75);
 	SendCommandSeq(&InitData[35], 6);
-}
-
-int main(void)
-{
-	uint16_t i;
-    uint32_t p;
-	DDRD |= (1 << D_C) | (1 << Reset); // output: PD2 -> Data/Command; PD3 -> Reset
-	init_Timer1();
-	SPI_init();
-	sei();
-	Display_init();
-
-	for (i = 0; i < 23232; i++) // 132*176 = 23232
-	{
-        SPISend16Bit(0x7E0); //grün
-	}
-
-	SendCommandSeq(window, 6);
-	for (i = 0; i < 10640; i++) // 140*76 = 10640
-	{
-        SPISend16Bit(0xF800);   //rot 
-	}
-    
-    Waitms(1000);
-    
-    for (i = 0; i < 10640; i++) // 140*76 = 10640
-	{
-        SPISend16Bit(Bild1[i]);
-        
-    }
-
-	while (1)
-	{
-		;
-	}
 }
