@@ -23,7 +23,7 @@ Discarded input sections
  .bss           0x0000000000000000        0x0 build/default/production/picture.o
  .progmemx.data.Bild1
                 0x0000000000000000     0x16b0 build/default/production/picture.o
- .debug_info    0x0000000000000000      0x213 build/default/production/picture.o
+ .debug_info    0x0000000000000000      0x226 build/default/production/picture.o
  .debug_abbrev  0x0000000000000000       0x31 build/default/production/picture.o
  .debug_aranges
                 0x0000000000000000       0x18 build/default/production/picture.o
@@ -416,10 +416,10 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0xc81
+.debug_info     0x0000000000000000      0xc94
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x68d build/default/production/main.o
+ .debug_info    0x00000000000005f4      0x6a0 build/default/production/main.o
 
 .debug_abbrev   0x0000000000000000      0x6fd
  *(.debug_abbrev)

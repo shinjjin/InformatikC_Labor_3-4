@@ -31,7 +31,7 @@ volatile uint16_t counter;
 void SPISend8Bit(uint8_t data);
 void SendCommandSeq(const uint16_t * data, uint32_t Anzahl);
 
-const uint16_t window[]={0xEF08, 0x1805, 0x1267, 0x151C, 0x139C, 0x1611};
+const uint16_t window[]={0xEF08, 0x1805, 0x1267, 0x151C, 0x1311, 0x169C}; 
 
 ISR(TIMER1_COMPA_vect){
 	counter++;	
@@ -138,7 +138,6 @@ int main(void){
      SPISend8Bit(0xF8);      // rot 0xF800
      SPISend8Bit(0x00);
     }
-
-    
+      
 	while(1){;}
 }
