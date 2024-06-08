@@ -77,6 +77,14 @@ void SPISend8Bit(uint8_t data)
 	PORTB |= (1 << SS); // CS high
 }
 
+void SPISend16Bit(uint16_t data){
+    uint8_t SendeByte;
+    SendeByte = (data >> 8) & 0xFF; // High-Byte des Kommandos
+	SPISend8Bit(SendeByte);
+	SendeByte = data & 0xFF; // Low-Byte des Kommandos
+	SPISend8Bit(SendeByte);
+}
+
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl)
 {
 	uint32_t index;
@@ -139,16 +147,19 @@ int main(void)
 
 	for (i = 0; i < 23232; i++) // 132*176 = 23232
 	{
-		SPISend8Bit(0x7); // grün 0x7E0
-		SPISend8Bit(0xE0);
+        SPISend16Bit(0x7E0); //grün
 	}
 
 	SendCommandSeq(window, 6);
 	for (i = 0; i < 10640; i++) // 140*76 = 10640
 	{
-		SPISend8Bit(0xF8); // rot 0xF800
-		SPISend8Bit(0x00);
+        SPISend16Bit(0xF800);   //rot 
 	}
+    
+//    for (i = 0; i < 10640; i++) // 140*76 = 10640
+//	{
+//        
+//    }
 
 	while (1)
 	{

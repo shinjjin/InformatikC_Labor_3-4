@@ -48,6 +48,7 @@ void init_Timer1();
 void init_Timer0();
 void SPI_init();
 void SPISend8Bit(uint8_t data);
+void SPISend16Bit (uint16_t data);
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl);
 void Display_init(void);
 
@@ -68,16 +69,14 @@ int main(void)
 	// draw bg
 	for (i = 0; i < 23232; i++) // 132*176 = 23232
 	{
-		SPISend8Bit(0xFF); // gelb 0xFFE0
-		SPISend8Bit(0xE0);
+		SPISend16Bit(0xFFE0); // gelb 0xFFE0
 	}
 
 	// draw square
 	SendCommandSeq(window, 6);
 	for (i = 0; i < 300; i++) // 20*15 = 300
 	{
-		SPISend8Bit(0x7); // grün 0x7E0
-		SPISend8Bit(0xE0);
+		SPISend16Bit(0x7E0); // grün 0x7E0
 	}
 
 	init_Timer0();
@@ -221,6 +220,15 @@ void SPISend8Bit(uint8_t data)
 	while (!(SPSR & (1 << SPIF)))
 		;				// wait for transmission complete
 	PORTB |= (1 << SS); // CS high
+}
+
+// SPI send 16 bit
+void SPISend16Bit(uint16_t data){
+    uint8_t SendeByte;
+    SendeByte = (data >> 8) & 0xFF; // High-Byte des Kommandos
+	SPISend8Bit(SendeByte);
+	SendeByte = data & 0xFF; // Low-Byte des Kommandos
+	SPISend8Bit(SendeByte);
 }
 
 // Send command sequence
