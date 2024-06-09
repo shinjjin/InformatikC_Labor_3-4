@@ -17,6 +17,7 @@
 #include <avr/interrupt.h>
 #include "picture.h"
 
+// defining the text replacements
 #define SPI_DDR DDRB
 #define SS PINB2
 #define MOSI PINB3
@@ -39,43 +40,32 @@ void Display_init(void);
 // main method
 int main(void)
 {
-	uint16_t i;
-	uint16_t x;
-	uint32_t p;
+	// initializing the variables
+	uint16_t i;						   // used for counting through for loop
+	uint16_t x;						   // used for moving through compressed picture data
+	uint32_t p;						   // used for counting through for loop
 	DDRD |= (1 << D_C) | (1 << Reset); // output: PD2 -> Data/Command; PD3 -> Reset
+
+	// calling the functions
 	init_Timer1();
 	SPI_init();
 	sei();
 	Display_init();
 
+	// drawing the background
 	for (i = 0; i < 23232; i++) // 132*176 = 23232
 	{
 		SPISend16Bit(0x7E0); // grün
 	}
 
+	// drawing the sqare (in the place the image should be called)
 	SendCommandSeq(window, 6);
 	for (i = 0; i < 10640; i++) // 140*76 = 10640
 	{
 		SPISend16Bit(0xF800); // rot
 	}
 
-	// for (i = 0; i < 10640 && Bild1[i] < 2904; i += x) // 140*76 = 10640
-	// {
-	// 	if (Bild1[i] == Bild1[i + x])
-	// 	{
-	// 		x = Bild1[i + 2] + 2;
-	// 		for (p = 0; p < x; p++)
-	// 		{
-	// 			SPISend16Bit(Bild1[i]);
-	// 		}
-	// 	}
-	// 	else
-	// 	{
-	// 		SPISend16Bit(Bild1[i]);
-	// 		x = 1;
-	// 	}
-	// }
-
+	// logic for decoding and drawing the image
 	i = 0;
 	while (i < 2900)
 	{
@@ -93,9 +83,9 @@ int main(void)
 			SPISend16Bit(Bild1[i]);
 			i++;
 		}
-		Waitms(1);
 	}
 
+	// endless loop
 	while (1)
 	{
 		;
@@ -118,14 +108,14 @@ void Waitms(const uint16_t msWait)
 	sei();			   // Zuweisung erfolgt wg. 8 bit controller in 2 Schritten.
 	do
 	{
-		cli();
+		cli(); // disables interrupts for a timed sequence
 		countertemp = counter;
 		sei();
 		diff = countertemp + ~aktTime + 1;
 	} while (diff < msWait);
 }
 
-// Timer0 interrupt service routine
+// Timer1 interrupt service routine
 void init_Timer1()
 {
 	TCCR1B |= (1 << CS10) | (1 << WGM12); // TimerCounter1ControlRegisterB Clock Select |(1<<CS10)=>prescaler = 1; WGM12=>CTC mode
@@ -139,8 +129,7 @@ void SPI_init()
 	// set CS, MOSI and SCK to output
 	SPI_DDR |= (1 << SS) | (1 << MOSI) | (1 << SCK);
 	// enable SPI, set as master, and clock to fosc/4 or 128
-	SPCR = (1 << SPE) | (1 << MSTR); // | (1 << SPR1) | (1 << SPR0); 4MHz bzw. 125kHz
-									 // SPSR |= 0x1;
+	SPCR = (1 << SPE) | (1 << MSTR); //	4MHz bzw. 125kHz
 }
 
 // SPI send 8 bit
