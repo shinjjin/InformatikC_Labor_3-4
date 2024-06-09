@@ -65,6 +65,8 @@ int main(void)
 	SPI_init();
 	sei();
 	Display_init();
+	cli(); // disable global interrupt
+	init_Timer0();
 
 	// draw bg
 	for (i = 0; i < 23232; i++) // 132*176 = 23232
@@ -79,7 +81,9 @@ int main(void)
 		SPISend16Bit(0x7E0); // grün 0x7E0
 	}
 
-	init_Timer0();
+	sei(); // enable global interrupt
+
+	// main loop (infinity loop)
 	while (1)
 	{
 		;
@@ -123,8 +127,8 @@ ISR(TIMER0_COMPA_vect)
 	if (!(PIND & (1 << PD1)))
 	{ // Button 2 is pressed
 		prev_count_2++;
-		if (prev_count_2 >= 10)
-		{ // Check debounce threshold
+		if (prev_count_2 >= 10) // Check debounce threshold
+		{
 			button_pressed_2 = 1;
 			count_2++;
 		}
@@ -145,12 +149,12 @@ ISR(TIMER0_COMPA_vect)
 			SPISend16Bit(0xFFE0); // gelb 0xFFE0
 		}
 		// move square
-		window[2] += 0x1;
-		window[4] += 0x1;
+		window[2] += 0x1; // x1 move right
+		window[4] += 0x1; // x2 move right
 	}
 
 	// check for a button press
-	if (button_pressed_2 && window[2] > 0x1200 && (count_2 == 1 || count_2 >= 100))
+	if (button_pressed_2 && window[2] > 0x1200 && (count_2 == 1 || count_2 >= 100)) // Button 2 pressed & square is not at the left edge & button is pressed for 1 or 100 cycles
 	{
 		// erase square
 		SendCommandSeq(window, 6);
@@ -159,8 +163,8 @@ ISR(TIMER0_COMPA_vect)
 			SPISend16Bit(0xFFE0); // gelb 0xFFE0
 		}
 		// move square
-		window[2] -= 0x1;
-		window[4] -= 0x1;
+		window[2] -= 0x1; // x1 move left
+		window[4] -= 0x1; // x2 move left
 	}
 }
 
@@ -178,9 +182,9 @@ void Waitms(const uint16_t msWait)
 {
 	static uint16_t aktTime, diff;
 	uint16_t countertemp;
-	cli();			   // da 16 bit Variablen könnte ohne cli() sei() sich der Wert
-	aktTime = counter; // von counter ändern, bevor er komplett aktTime zugewiesen wird.
-	sei();			   // Zuweisung erfolgt wg. 8 bit controller in 2 Schritten.
+	cli(); // da 16 bit Variablen könnte ohne cli() sei() sich der Wert von counter ändern, bevor er komplett aktTime zugewiesen wird.
+	aktTime = counter;
+	sei();
 	do
 	{
 		cli();
@@ -232,9 +236,9 @@ void SPISend16Bit(uint16_t data)
 // Send command sequence
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl)
 {
-	uint32_t index;
-	uint8_t SendeByte;
-	for (index = 0; index < Anzahl; index++)
+	uint32_t index;							 // Index für die Anzahl der Kommandos
+	uint8_t SendeByte;						 // Variable für die zu sendenden Bytes
+	for (index = 0; index < Anzahl; index++) // Schleife für die Anzahl der Kommandos
 	{
 		PORTD |= (1 << D_C);				   // Data/Command auf High => Kommando-Modus
 		SendeByte = (data[index] >> 8) & 0xFF; // High-Byte des Kommandos
