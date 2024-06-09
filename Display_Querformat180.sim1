@@ -1,22 +1,24 @@
 <circuit version="" rev="df02fe" stepSize="1000000" stepsPS="1000000" NLsteps="100000" reaStep="1000000" animate="0" >
 
-<item itemtype="MCU" CircId="mega328-3" mainComp="false" Show_id="true" Show_Val="false" Pos="372,632" rotation="0" hflip="1" vflip="1" label="mega328" idLabPos="-5.38497,-19.1715" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="Projekt_Versuch4.X/dist/default/production/Projekt_Versuch4.X.production.hex" Auto_Load="true" saveEepr="true" Logic_Symbol="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" SerialMon="-1" />
+<item itemtype="MCU" CircId="mega328-3" mainComp="false" Show_id="true" Show_Val="false" Pos="372,632" rotation="0" hflip="1" vflip="1" label="mega328" idLabPos="-5.38497,-19.1715" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="Projekt_Versuch3.X/dist/default/production/Projekt_Versuch3.X.production.hex" Auto_Load="true" saveEepr="true" Logic_Symbol="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" SerialMon="-1" />
 
-<item itemtype="TextComponent" CircId="TextComponent-79" mainComp="false" Show_id="false" Show_Val="false" Pos="360,372" rotation="0" hflip="1" vflip="1" label="TextComponent-79" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="0" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="12 _px" Fixed_Width="false" Text="TFT-Display" />
+<item itemtype="TextComponent" CircId="TextComponent-79" mainComp="false" Show_id="false" Show_Val="false" Pos="360,288" rotation="0" hflip="1" vflip="1" label="TextComponent-79" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="0" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="12 _px" Fixed_Width="false" Text="TFT-Display" />
 
-<item itemtype="S65Display" CircId="S65Display-126" mainComp="false" Show_id="true" Show_Val="false" Pos="596,564" rotation="0" hflip="1" vflip="1" label="S65Display" idLabPos="-76,-237" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="S65Display" CircId="S65Display-126" mainComp="false" Show_id="true" Show_Val="false" Pos="592,564" rotation="0" hflip="1" vflip="1" label="S65Display" idLabPos="-76,-237" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
 <item itemtype="Oscope" CircId="Oscope-127" mainComp="false" Show_id="false" Show_Val="false" Pos="800,644" rotation="0" hflip="1" vflip="1" label="Oscope-127" idLabPos="-90,-100" labelrot="0" valLabPos="-16,20" valLabRot="0" Basic_X="135 _Px" Basic_Y="135 _Px" BufferSize="600000" connectGnd="true" InputImped="1e+07 Ω" TimDiv="50000" TimPos="0,0,0,0," VolDiv="0.499998,1,1,1," Tunnels="SCK/CLK,SS/CS,MOSI/DIN,," Trigger="0" Filter="0.1 V" Trigger="0" AutoSC="0" Tracks="4" HideCh="false,false,false,false," VolPos="-2.49999,0,0,0," />
 
-<item itemtype="Push" CircId="Push-132" mainComp="false" Show_id="false" Show_Val="false" Pos="380,536" rotation="0" hflip="1" vflip="1" label="Push-132" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+<item itemtype="Push" CircId="Push-132" mainComp="false" Show_id="false" Show_Val="false" Pos="376,384" rotation="0" hflip="1" vflip="1" label="Push-132" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
 
-<item itemtype="Push" CircId="Push-133" mainComp="false" Show_id="false" Show_Val="false" Pos="444,536" rotation="0" hflip="1" vflip="1" label="Push-133" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
+<item itemtype="Push" CircId="Push-133" mainComp="false" Show_id="false" Show_Val="false" Pos="440,384" rotation="0" hflip="1" vflip="1" label="Push-133" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Norm_Close="false" Poles="1" />
 
-<item itemtype="Ground" CircId="Ground-134" mainComp="false" Show_id="false" Show_Val="false" Pos="484,588" rotation="0" hflip="1" vflip="1" label="Ground-134" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
+<item itemtype="Ground" CircId="Ground-134" mainComp="false" Show_id="false" Show_Val="false" Pos="480,436" rotation="0" hflip="1" vflip="1" label="Ground-134" idLabPos="-16,8" labelrot="0" valLabPos="-16,20" valLabRot="0" />
 
-<item itemtype="TextComponent" CircId="TextComponent-136" mainComp="false" Show_id="false" Show_Val="false" Pos="348,488" rotation="0" hflip="1" vflip="1" label="Button 1" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="10 _px" Fixed_Width="true" Text="Button 1" />
+<item itemtype="TextComponent" CircId="TextComponent-136" mainComp="false" Show_id="false" Show_Val="false" Pos="344,336" rotation="0" hflip="1" vflip="1" label="Button 1" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="10 _px" Fixed_Width="true" Text="Button 1" />
 
-<item itemtype="TextComponent" CircId="TextComponent-137" mainComp="false" Show_id="false" Show_Val="false" Pos="432,488" rotation="0" hflip="1" vflip="1" label="TextComponent-137" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="10 _px" Fixed_Width="true" Text="Button 2" />
+<item itemtype="TextComponent" CircId="TextComponent-137" mainComp="false" Show_id="false" Show_Val="false" Pos="428,336" rotation="0" hflip="1" vflip="1" label="TextComponent-137" idLabPos="-16,-24" labelrot="0" valLabPos="-16,20" valLabRot="0" Margin="5 _px" Border="1 _px" Color="#ffffdc" Opacity="1" Font="Helvetica [Cronyx]" Font_Color="#000080" Font_Size="10 _px" Fixed_Width="true" Text="Button 2" />
+
+<item itemtype="MCU" CircId="mega328-138" mainComp="false" Show_id="true" Show_Val="false" Pos="368,448" rotation="0" hflip="1" vflip="1" label="mega328-138" idLabPos="0,-20" labelrot="0" valLabPos="-16,20" valLabRot="0" Frequency="16 MHz" Program="../../240506_Labor1/TastenPrellen.X/TastenPrellen.X/dist/default/production/TastenPrellen.X.production.hex" Auto_Load="false" saveEepr="true" Logic_Symbol="false" Rst_enabled="false" Ext_Osc="false" Wdt_enabled="false" Clk_Out="false" SerialMon="-1" />
 
 <item itemtype="Node" CircId="Node-128" mainComp="false" Pos="624,596" />
 
@@ -24,7 +26,7 @@
 
 <item itemtype="Node" CircId="Node-131" mainComp="false" Pos="608,660" />
 
-<item itemtype="Node" CircId="Node-135" mainComp="false" Pos="484,564" />
+<item itemtype="Node" CircId="Node-135" mainComp="false" Pos="480,412" />
 
 <item itemtype="Connector" uid="Connector-135" startpinid="Oscope-127-Pin0" endpinid="Node-128-1" pointList="712,596,624,596" />
 
@@ -38,24 +40,26 @@
 
 <item itemtype="Connector" uid="Connector-146" startpinid="mega328-3-PORTB3" endpinid="Node-131-0" pointList="412,728,608,728,608,660" />
 
-<item itemtype="Connector" uid="Connector-188" startpinid="mega328-3-PORTD3" endpinid="S65Display-126-PinRst" pointList="364,672,332,672,332,600,564,600,564,564" />
+<item itemtype="Connector" uid="Connector-188" startpinid="mega328-3-PORTD3" endpinid="S65Display-126-PinRst" pointList="364,672,332,672,332,600,560,600,560,564" />
 
-<item itemtype="Connector" uid="Connector-191" startpinid="S65Display-126-PinCs" endpinid="Node-129-0" pointList="580,564,580,628,576,628" />
+<item itemtype="Connector" uid="Connector-191" startpinid="S65Display-126-PinCs" endpinid="Node-129-0" pointList="576,564,576,628" />
 
-<item itemtype="Connector" uid="Connector-192" startpinid="mega328-3-PORTD2" endpinid="S65Display-126-PinDc" pointList="364,664,340,664,340,608,596,608,596,564" />
+<item itemtype="Connector" uid="Connector-192" startpinid="mega328-3-PORTD2" endpinid="S65Display-126-PinDc" pointList="364,664,340,664,340,608,592,608,592,564" />
 
-<item itemtype="Connector" uid="Connector-194" startpinid="Node-131-2" endpinid="S65Display-126-PinSi" pointList="608,660,608,564,612,564" />
+<item itemtype="Connector" uid="Connector-194" startpinid="Node-131-2" endpinid="S65Display-126-PinSi" pointList="608,660,608,564" />
 
-<item itemtype="Connector" uid="Connector-195" startpinid="S65Display-126-PinScl" endpinid="Node-128-2" pointList="628,564,628,596,624,596" />
+<item itemtype="Connector" uid="Connector-195" startpinid="S65Display-126-PinScl" endpinid="Node-128-2" pointList="624,564,624,596" />
 
-<item itemtype="Connector" uid="Connector-197" startpinid="Push-133-switch0pinN" endpinid="Node-135-1" pointList="460,536,484,536,484,564" />
+<item itemtype="Connector" uid="Connector-197" startpinid="Push-133-switch0pinN" endpinid="Node-135-1" pointList="456,384,480,384,480,412" />
 
-<item itemtype="Connector" uid="Connector-198" startpinid="Push-132-switch0pinN" endpinid="Node-135-0" pointList="396,536,396,564,484,564" />
+<item itemtype="Connector" uid="Connector-198" startpinid="Push-132-switch0pinN" endpinid="Node-135-0" pointList="392,384,392,412,480,412" />
 
-<item itemtype="Connector" uid="Connector-199" startpinid="Node-135-2" endpinid="Ground-134-Gnd" pointList="484,564,484,572" />
+<item itemtype="Connector" uid="Connector-199" startpinid="Node-135-2" endpinid="Ground-134-Gnd" pointList="480,412,480,420" />
 
-<item itemtype="Connector" uid="Connector-200" startpinid="Push-132-pinP0" endpinid="mega328-3-PORTD1" pointList="364,536,352,536,352,656,364,656" />
+<item itemtype="Connector" uid="Connector-201" startpinid="Push-133-pinP0" endpinid="mega328-3-PORTB1" pointList="424,384,424,744,412,744" />
 
-<item itemtype="Connector" uid="Connector-201" startpinid="Push-133-pinP0" endpinid="mega328-3-PORTB1" pointList="428,536,428,744,412,744" />
+<item itemtype="Connector" uid="Connector-215" startpinid="mega328-138-PORTD1" endpinid="Push-132-pinP0" pointList="360,472,344,472,344,384,360,384" />
+
+<item itemtype="Connector" uid="Connector-214" startpinid="mega328-3-PORTD1" endpinid="mega328-138-PORTD0" pointList="364,656,352,656,352,464,360,464" />
 
 </circuit>
