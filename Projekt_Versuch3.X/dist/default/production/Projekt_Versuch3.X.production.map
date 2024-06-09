@@ -403,10 +403,10 @@ END GROUP
 .debug_pubnames
  *(.debug_pubnames)
 
-.debug_info     0x0000000000000000      0xe8d
+.debug_info     0x0000000000000000      0xedc
  *(.debug_info .gnu.linkonce.wi.*)
  .debug_info    0x0000000000000000      0x5f4 C:/Program Files/Microchip/xc8/v2.46/dfp/xc8/avr/lib/avr5/memx-const/crtatmega328p.o
- .debug_info    0x00000000000005f4      0x899 build/default/production/main.o
+ .debug_info    0x00000000000005f4      0x8e8 build/default/production/main.o
 
 .debug_abbrev   0x0000000000000000      0x707
  *(.debug_abbrev)
