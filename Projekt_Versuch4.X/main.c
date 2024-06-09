@@ -12,7 +12,7 @@
 #define Reset PIND3 // display: Reset
 
 volatile uint16_t counter;
-const uint16_t window[] = {0xEF08, 0x1805, 0x1267, 0x151C, 0x1311, 0x169C};
+const uint16_t window[] = {0xEF08, 0x1805, 0x1267, 0x151C, 0x1312, 0x169D};
 
 void SPISend8Bit(uint8_t data);
 void SendCommandSeq(const uint16_t *data, uint32_t Anzahl);
