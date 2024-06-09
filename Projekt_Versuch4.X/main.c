@@ -1,17 +1,3 @@
-/******************************************************************************
- *  Hochschule für Angewandte Wissenschaften Hamburg						      *
- *  Fakultät DMI															      *
- *  Department Medientechnik											          *
- *  Veranstaltung: Informatik & Elektronik                                     *
- *******************************************************************************
- *  TFT-Display per SPI-Schnittstelle										  *
- *  Das Display wird im Querformat betrieben.   							      *
- *  Der Hintergrund wird grün gefärbt und ein rotes Rechteck aus 140x76 Pixeln *
- *  dargestellt. Das rote Rechteck wird durch das Bild1 ersetzt. Die Bild-     *
- *  daten sind per Farbwiederholung komprimiert in der Datei picture.c.        *
- *  Dipl.-Ing. M. Berens													      *
- ******************************************************************************/
-
 #define F_CPU 16000000UL
 #include <xc.h>
 #include <avr/interrupt.h>

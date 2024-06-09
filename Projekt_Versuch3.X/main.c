@@ -1,18 +1,3 @@
-/******************************************************************************
- * Hochschule für Angewandte Wissenschaften Hamburg						      *
- * Fakultät DMI															      *
- * Department Medientechnik											 	      *
- * Veranstaltung: Informatik 3 & Elektronik                                    *
- *******************************************************************************
- * TFT-Display per SPI-Schnittstelle										      *
- * Das Display wird im Hochformat betrieben.   							      *
- * Der Hintergrund wird gelb gefärbt und ein grünes Rechteck aus 15x20 Pixeln  *
- * wird 90 Pixel vom oberen und 35 Pixel vom linken Rand dargestellt.          *
- * Das Rechteck wird per button1 bzw. button2-Betätigung nach links und rechts *
- * auf dem Display bewegt. Das Rechteck läuft nicht über den Rand hinaus.      *
- * Dipl.-Ing. M. Berens													      *
- ******************************************************************************/
-
 #define F_CPU 16000000UL
 #include <xc.h>
 #include <avr/interrupt.h>
