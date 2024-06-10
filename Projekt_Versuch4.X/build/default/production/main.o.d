@@ -9,7 +9,7 @@ build/default/production/main.o.d build/default/production/main.o: main.c \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\stdint.h \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\bits\alltypes.h \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\bits\stdint.h \
- C:/Program\ Files/Microchip/xc8/v2.46/dfp/xc8/avr/include/avr/iom328p.h \
+ C:/Program\ Files/Microchip/MPLABX/v6.20/packs/Microchip/ATmega_DFP/3.1.264/xc8/avr/include/avr/iom328p.h \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\avr\portpins.h \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\avr\common.h \
  c:\program\ files\microchip\xc8\v2.46\avr\avr\include\avr\fuse.h \
@@ -38,7 +38,7 @@ c:\program\ files\microchip\xc8\v2.46\avr\avr\include\bits\alltypes.h:
 
 c:\program\ files\microchip\xc8\v2.46\avr\avr\include\bits\stdint.h:
 
-C:/Program\ Files/Microchip/xc8/v2.46/dfp/xc8/avr/include/avr/iom328p.h:
+C:/Program\ Files/Microchip/MPLABX/v6.20/packs/Microchip/ATmega_DFP/3.1.264/xc8/avr/include/avr/iom328p.h:
 
 c:\program\ files\microchip\xc8\v2.46\avr\avr\include\avr\portpins.h:
 

@@ -23,7 +23,7 @@ volatile uint8_t button_pressed_2 = 0; // Flag for debounced Button 2 press
 volatile uint8_t prev_count_1 = 0; // Counter for debouncing Button 1
 volatile uint8_t prev_count_2 = 0; // Counter for debouncing Button 2
 
-uint16_t window[] = {0xEF08, 0x1800, 0x1223, 0x135A, 0x1536, 0x1668}; // Array for the initialization of the window
+uint16_t window[] = {0xEF08, 0x1800, 0x1223, 0x135A, 0x1536, 0x1668}; // Array for the initialization of the window: start, format, x1, y1, x2, y2
 
 // defining the methods
 ISR(TIMER1_COMPA_vect);
@@ -40,10 +40,10 @@ void Display_init(void);
 // main method
 int main(void)
 {
-	DDRB &= ~(1 << PORTB1);
-	PORTB |= (1 << PORTB1);
-	DDRD &= ~(1 << PORTD1);
-	PORTD |= (1 << PORTD1);
+	DDRB &= ~(1 << PORTB1);			   // input: PB1 -> Button 1
+	PORTB |= (1 << PORTB1);			   // pull-up resistor
+	DDRD &= ~(1 << PORTD1);			   // input: PD1 -> Button 2
+	PORTD |= (1 << PORTD1);			   // pull-up resistor
 	DDRD |= (1 << D_C) | (1 << Reset); // output: PD2 -> Data/Command; PD3 -> Reset
 
 	init_Timer1();
